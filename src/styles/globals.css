@@ -4,88 +4,86 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --accent-color: #e74c3c;
-  --background-color: #f7f9fc;
-  --text-color: #2c3e50;
+@layer base {
+  body {
+    @apply bg-gray-100 text-gray-900 font-sans;
+    font-family: 'Poppins', sans-serif;
+  }
 }
 
-body {
-  @apply bg-gray-100 text-text font-sans;
-  font-family: 'Poppins', sans-serif;
+@layer components {
+  .calendar-container {
+    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16;
+  }
+
+  .month-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
+  }
+
+  .month-card {
+    @apply bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105;
+  }
+
+  .month-header {
+    @apply bg-blue-500 text-white py-4 px-5 text-2xl font-semibold;
+  }
+
+  .weekday-header {
+    @apply grid grid-cols-7 bg-gray-100 text-gray-700 text-xs uppercase font-semibold;
+  }
+
+  .weekday {
+    @apply py-3 text-center;
+  }
+
+  .days-grid {
+    @apply grid grid-cols-7 gap-px bg-gray-200;
+  }
+
+  .day {
+    @apply relative bg-white p-2 text-sm h-28 transition-all duration-200 ease-in-out;
+  }
+
+  .day-number {
+    @apply absolute top-1 left-2 font-light text-base;
+  }
+
+  .day-content {
+    @apply mt-7 text-xs;
+  }
+
+  .holiday {
+    @apply bg-red-100 hover:bg-red-200;
+  }
+
+  .weekend {
+    @apply bg-gray-50;
+  }
+
+  .empty-day {
+    @apply bg-gray-50;
+  }
+
+  .long-weekend {
+    @apply bg-green-100 hover:bg-green-200;
+  }
+
+  .extra-long-weekend {
+    @apply bg-blue-100 hover:bg-blue-200;
+  }
+
+  .tooltip {
+    @apply absolute z-10 p-3 bg-white rounded-lg shadow-xl text-xs max-w-xs;
+  }
 }
 
-.calendar-container {
-  @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16;
-}
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-in-out;
+  }
 
-.month-grid {
-  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
-}
-
-.month-card {
-  @apply bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105;
-}
-
-.month-header {
-  @apply bg-primary text-white py-4 px-5 text-2xl font-semibold;
-}
-
-.weekday-header {
-  @apply grid grid-cols-7 bg-gray-100 text-gray-700 text-xs uppercase font-semibold;
-}
-
-.weekday {
-  @apply py-3 text-center;
-}
-
-.days-grid {
-  @apply grid grid-cols-7 gap-px bg-gray-200;
-}
-
-.day {
-  @apply relative bg-white p-2 text-sm h-28 transition-all duration-200 ease-in-out;
-}
-
-.day-number {
-  @apply absolute top-1 left-2 font-light text-base;
-}
-
-.day-content {
-  @apply mt-7 text-xs;
-}
-
-.holiday {
-  @apply bg-accent bg-opacity-20 hover:bg-opacity-30;
-}
-
-.weekend {
-  @apply bg-gray-50;
-}
-
-.empty-day {
-  @apply bg-gray-50;
-}
-
-.long-weekend {
-  @apply bg-secondary bg-opacity-20 hover:bg-opacity-30;
-}
-
-.extra-long-weekend {
-  @apply bg-primary bg-opacity-20 hover:bg-opacity-30;
-}
-
-.tooltip {
-  @apply absolute z-10 p-3 bg-white rounded-lg shadow-xl text-xs max-w-xs;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-in-out;
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 }

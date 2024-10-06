@@ -47,30 +47,30 @@ function getDayLabel(year, month, day) {
 }
 ---
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gray-50">
+<div class="calendar-container">
   <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">{year} Metų Kalendorius</h1>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+  <div class="month-grid">
     {months.map((month, monthIndex) => (
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <div class="bg-gradient-to-r from-indigo-600 to-indigo-400 text-white py-2 px-4">
+      <div class="month-card">
+        <div class="month-header">
           <h2 class="text-lg font-semibold text-center">{month.name}</h2>
         </div>
-        <div class="grid grid-cols-7 bg-gray-50 text-gray-700 text-xs font-medium">
+        <div class="weekday-header">
           {weekdays.map((day) => (
-            <div class="py-1 text-center">{day}</div>
+            <div class="weekday">{day}</div>
           ))}
         </div>
-        <div class="grid grid-cols-7">
+        <div class="days-grid">
           {Array.from({ length: month.startDay }).map(() => (
-            <div class="bg-gray-50"></div>
+            <div class="empty-day"></div>
           ))}
           {Array.from({ length: month.days }).map((_, dayIndex) => {
             const day = dayIndex + 1;
             const dayClass = getDayClass(year, monthIndex, day);
             const dayLabel = getDayLabel(year, monthIndex, day);
             return (
-              <div class={dayClass} title={dayLabel}>
-                <span class="absolute top-1 left-1 text-xs font-medium">{day}</span>
+              <div class={`day ${dayClass}`} title={dayLabel}>
+                <span class="day-number">{day}</span>
               </div>
             );
           })}
