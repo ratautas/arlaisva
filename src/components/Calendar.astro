@@ -29,7 +29,7 @@ function getDayClass(year, month, day) {
   const isExtendedWeekend = extendedWeekends.includes(dateString);
   const isExtraExtendedWeekend = extraExtendedWeekends.includes(dateString);
 
-  let classes = 'relative p-2 h-16 md:h-20 border border-gray-700 transition-all duration-200 ease-in-out';
+  let classes = 'relative border border-gray-700 transition-all duration-200 ease-in-out';
   if (isWeekend) classes += ' bg-gray-600 hover:bg-gray-500';
   if (isHoliday) classes += ' bg-red-900 hover:bg-red-800';
   if (isExtendedWeekend) classes += ' bg-green-900 hover:bg-green-800';
@@ -53,29 +53,29 @@ function getDayLabel(year, month, day) {
 ---
 
 <div class="calendar-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <div class="max-w-2xl mx-auto mb-8 p-6 bg-gray-800 border border-gray-700">
-    <h2 class="text-2xl font-bold text-white mb-4">Spalvų reikšmės</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <div class="max-w-4xl mx-auto mb-4 p-4 bg-gray-800 border border-gray-700">
+    <h2 class="text-lg font-bold text-white mb-2">Spalvų reikšmės</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
       <div class="flex items-center">
-        <div class="w-6 h-6 bg-gray-600 border border-gray-500 mr-3"></div>
-        <span class="text-sm text-gray-300">Savaitgalis</span>
+        <div class="w-4 h-4 bg-gray-600 border border-gray-500 mr-2"></div>
+        <span class="text-gray-300">Savaitgalis</span>
       </div>
       <div class="flex items-center">
-        <div class="w-6 h-6 bg-red-900 border border-red-800 mr-3"></div>
-        <span class="text-sm text-gray-300">Šventinė diena</span>
+        <div class="w-4 h-4 bg-red-900 border border-red-800 mr-2"></div>
+        <span class="text-gray-300">Šventinė diena</span>
       </div>
       <div class="flex items-center">
-        <div class="w-6 h-6 bg-green-900 border border-green-800 mr-3"></div>
-        <span class="text-sm text-gray-300">Pratęstas savaitgalis (4+ dienos)</span>
+        <div class="w-4 h-4 bg-green-900 border border-green-800 mr-2"></div>
+        <span class="text-gray-300">Pratęstas savaitgalis (4+)</span>
       </div>
       <div class="flex items-center">
-        <div class="w-6 h-6 bg-blue-900 border border-blue-800 mr-3"></div>
-        <span class="text-sm text-gray-300">Ypač pratęstas savaitgalis (5+ dienos)</span>
+        <div class="w-4 h-4 bg-blue-900 border border-blue-800 mr-2"></div>
+        <span class="text-gray-300">Ypač pratęstas savaitgalis (5+)</span>
       </div>
     </div>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     {months.map((month, monthIndex) => (
       <div class="bg-gray-800 border border-gray-700">
         <div class="bg-gray-900 text-white py-3 px-4">
@@ -86,17 +86,17 @@ function getDayLabel(year, month, day) {
             <div class="py-2 text-center">{day}</div>
           ))}
         </div>
-        <div class="grid grid-cols-7 gap-px bg-gray-900">
+        <div class="grid grid-cols-7 gap-px bg-gray-900 text-xs">
           {Array.from({ length: month.startDay }).map(() => (
-            <div class="bg-gray-800"></div>
+            <div class="bg-gray-800 h-6"></div>
           ))}
           {Array.from({ length: month.days }).map((_, dayIndex) => {
             const day = dayIndex + 1;
             const dayClass = getDayClass(year, monthIndex, day);
             const dayLabel = getDayLabel(year, monthIndex, day);
             return (
-              <div class={`${dayClass}`}>
-                <span class="absolute top-1 left-2 text-sm font-light">{day}</span>
+              <div class={`${dayClass} h-6 flex items-center justify-center`}>
+                <span class="font-light">{day}</span>
                 {dayLabel && (
                   <span class="tooltip">{dayLabel}</span>
                 )}
