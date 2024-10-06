@@ -28,11 +28,11 @@ function getDayClass(year, month, day) {
   const isExtendedWeekend = extendedWeekends.includes(dateString);
   const isExtraExtendedWeekend = extraExtendedWeekends.includes(dateString);
 
-  let classes = 'relative p-2 h-16 md:h-20 border border-gray-200 transition-all duration-200 ease-in-out';
-  if (isWeekend) classes += ' bg-gray-50 hover:bg-gray-100';
-  if (isHoliday) classes += ' bg-red-50 hover:bg-red-100';
-  if (isExtendedWeekend) classes += ' bg-green-50 hover:bg-green-100';
-  if (isExtraExtendedWeekend) classes += ' bg-blue-50 hover:bg-blue-100';
+  let classes = 'relative p-2 h-16 md:h-20 border border-gray-700 transition-all duration-200 ease-in-out';
+  if (isWeekend) classes += ' bg-gray-600 hover:bg-gray-500';
+  if (isHoliday) classes += ' bg-red-900 hover:bg-red-800';
+  if (isExtendedWeekend) classes += ' bg-green-900 hover:bg-green-800';
+  if (isExtraExtendedWeekend) classes += ' bg-blue-900 hover:bg-blue-800';
   
   const dayLabel = getDayLabel(year, month, day);
   if (dayLabel) classes += ' has-tooltip';
