@@ -69,7 +69,7 @@ function getDayLabel(year, month, day) {
             const dayClass = getDayClass(year, monthIndex, day);
             const dayLabel = getDayLabel(year, monthIndex, day);
             return (
-              <div class={`day ${dayClass}`} title={dayLabel}>
+              <div class={`day ${dayClass}`} title={dayLabel || undefined}>
                 <span class="day-number">{day}</span>
               </div>
             );
