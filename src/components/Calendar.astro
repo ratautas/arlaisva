@@ -1,6 +1,6 @@
 ---
 import { getHolidays, getExtendedWeekends } from '../utils/holidayUtils.js';
-import { getMonthName, getWeekdayName, getMonthStartDay, getDaysInMonth, getCurrentYear } from '../utils/dateUtils.js';
+import { getMonthName, getWeekdayName, getMonthStartDay, getDaysInMonth, getCurrentYear, formatDate } from '../utils/dateUtils.js';
 import { WEEKEND, HOLIDAY, EXTENDED_WEEKEND, EXTRA_EXTENDED_WEEKEND, WEEKEND_LABEL, HOLIDAY_LABEL, EXTENDED_WEEKEND_LABEL, EXTRA_EXTENDED_WEEKEND_LABEL } from '../utils/constants.js';
 
 const { year = getCurrentYear() } = Astro.props;
@@ -71,6 +71,32 @@ function getDayLabel(year, month, day) {
       <div class="flex items-center">
         <div class="w-4 h-4 bg-blue-900 border border-blue-800 mr-2"></div>
         <span class="text-gray-300">Ypač pratęstas savaitgalis (5+)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto mt-8 p-4 bg-gray-800 border border-gray-700">
+    <h2 class="text-lg font-bold text-white mb-2">Pratęsti savaitgaliai {year} metais</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <h3 class="text-md font-semibold text-white mb-2">Pratęsti savaitgaliai (4+ dienos)</h3>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          {extendedWeekends.map((date) => (
+            <div class="bg-green-900 p-2 rounded">
+              <span class="text-gray-300">{formatDate(new Date(date))}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h3 class="text-md font-semibold text-white mb-2">Ypač pratęsti savaitgaliai (5+ dienos)</h3>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          {extraExtendedWeekends.map((date) => (
+            <div class="bg-blue-900 p-2 rounded">
+              <span class="text-gray-300">{formatDate(new Date(date))}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </div>
