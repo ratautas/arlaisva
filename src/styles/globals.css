@@ -13,7 +13,7 @@
 }
 
 body {
-  @apply bg-background text-text font-sans;
+  @apply bg-gray-100 text-text font-sans;
   font-family: 'Poppins', sans-serif;
 }
 
