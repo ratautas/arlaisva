@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import { getHolidays } from '../utils/holidayUtils';
+import { getCurrentYear } from '../utils/dateUtils';
+
+const currentYear = getCurrentYear();
+const holidays = getHolidays(currentYear);
+
+// Get all holiday markdown files
+const holidayArticles = await Astro.glob('../content/holidays/*.md');
+
+// Match holidays with their corresponding articles
+const holidaysWithArticles = holidays.map(holiday => {
+  const article = holidayArticles.find(article => {
+    const articleDate = new Date(article.frontmatter.date);
+    const holidayDate = new Date(holiday.date);
+    return articleDate.getMonth() === holidayDate.getMonth() && articleDate.getDate() === holidayDate.getDate();
+  });
+  return { ...holiday, article };
+});
+---
+
+<Layout title="Lietuvos šventės">
+  <Navigation currentPage="holidays" />
+  <main class="bg-gray-50 min-h-screen">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 class="text-4xl font-bold text-center text-gray-900 mb-8">Lietuvos šventės</h1>
+      <ul class="space-y-4">
+        {holidaysWithArticles.map(holiday => (
+          <li class="bg-white rounded-lg shadow p-4">
+            <h2 class="text-xl font-semibold text-gray-800">{holiday.name}</h2>
+            <p class="text-gray-600">{holiday.date}</p>
+            {holiday.article && (
+              <a href={`/holidays/${holiday.article.file.split('/').pop().split('.')[0]}`} class="text-blue-600 hover:underline">
+                Skaityti daugiau
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+</Layout>

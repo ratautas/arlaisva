@@ -1,0 +1,19 @@
+---
+import Layout from './Layout.astro';
+import Navigation from '../components/Navigation.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+  <Navigation currentPage="holidays" />
+  <main class="bg-gray-50 min-h-screen">
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">{frontmatter.title}</h1>
+      <p class="text-xl text-gray-600 mb-8">Data: {frontmatter.date}</p>
+      <div class="prose prose-lg">
+        <slot />
+      </div>
+    </article>
+  </main>
+</Layout>

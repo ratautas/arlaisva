@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Calendar from '../components/Calendar.astro';
+import Navigation from '../components/Navigation.astro';
+import { getCurrentYear } from '../utils/dateUtils';
+
+export function getStaticPaths() {
+  const currentYear = getCurrentYear();
+  const years = Array.from({ length: 21 }, (_, i) => currentYear - 10 + i);
+  return years.map(year => ({ params: { year: year.toString() } }));
+}
+
+const { year } = Astro.params;
+const parsedYear = parseInt(year);
+---
+
+<Layout title={`Lietuvos švenčių kalendorius ${year}`}>
+  <Navigation currentPage="year" />
+  <main class="bg-gray-50 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 class="text-4xl font-bold text-center text-gray-900 mb-4">Lietuvos švenčių kalendorius {year}</h1>
+      <Calendar year={parsedYear} />
+    </div>
+  </main>
+</Layout>

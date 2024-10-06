@@ -1,0 +1,60 @@
+---
+import { getCurrentYear } from '../utils/dateUtils';
+
+const { currentPage } = Astro.props;
+const currentYear = getCurrentYear();
+const years = Array.from({ length: 21 }, (_, i) => currentYear - 10 + i);
+
+const isActive = (page) => currentPage === page ? 'bg-blue-700' : 'hover:bg-blue-600';
+
+// Get the current year from the URL or use the current year as default
+const urlYear = Astro.url.pathname.split('/')[1];
+const selectedYear = urlYear && !isNaN(parseInt(urlYear)) ? parseInt(urlYear) : currentYear;
+---
+
+<nav class="bg-blue-500 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center">
+        <a href="/" class="flex-shrink-0">
+          <span class="text-white font-bold text-lg">LT Kalendorius</span>
+        </a>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="/" class={`text-white px-3 py-2 rounded-md text-sm font-medium ${isActive('home')}`}>
+              Pradžia
+            </a>
+            <a href="/holidays" class={`text-white px-3 py-2 rounded-md text-sm font-medium ${isActive('holidays')}`}>
+              Šventės
+            </a>
+            <a href="/about" class={`text-white px-3 py-2 rounded-md text-sm font-medium ${isActive('about')}`}>
+              Apie
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="ml-4 flex items-center md:ml-6">
+        <select
+          id="yearSelect"
+          class="bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-600 focus:ring-white"
+        >
+          {years.map((year) => (
+            <option value={year} selected={year === selectedYear}>
+              {year}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const yearSelect = document.getElementById('yearSelect');
+  if (yearSelect) {
+    yearSelect.addEventListener('change', (event) => {
+      const selectedYear = (event.target as HTMLSelectElement).value;
+      window.location.href = `/${selectedYear}`;
+    });
+  }
+</script>

@@ -1,0 +1,23 @@
+{
+  "name": "lithuanian-holiday-calendar",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^3.1.3",
+    "astro": "^2.6.4",
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
+    "tailwindcss": "^3.3.2"
+  },
+  "devDependencies": {
+    "vitest": "^0.32.0"
+  }
+}

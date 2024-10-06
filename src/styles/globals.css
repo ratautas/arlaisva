@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-50 text-gray-900 font-sans;
+  font-family: 'Roboto', sans-serif;
+}
+
+.calendar-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+}
+
+.month-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+}
+
+.month-card {
+  @apply bg-white rounded-lg shadow-md overflow-hidden;
+}
+
+.month-header {
+  @apply bg-blue-600 text-white py-3 px-4 text-xl font-bold;
+}
+
+.weekday-header {
+  @apply grid grid-cols-7 bg-gray-100 text-gray-600 text-xs uppercase font-semibold;
+}
+
+.weekday {
+  @apply py-2 text-center;
+}
+
+.days-grid {
+  @apply grid grid-cols-7 gap-px bg-gray-200;
+}
+
+.day {
+  @apply relative bg-white p-2 text-sm h-24 transition-colors duration-200;
+}
+
+.day-number {
+  @apply absolute top-1 left-1 font-light;
+}
+
+.day-content {
+  @apply mt-6 text-xs;
+}
+
+.holiday {
+  @apply bg-red-100 hover:bg-red-200;
+}
+
+.weekend {
+  @apply bg-gray-50;
+}
+
+.empty-day {
+  @apply bg-gray-50;
+}
+
+.long-weekend {
+  @apply bg-green-100 hover:bg-green-200;
+}
+
+.extra-long-weekend {
+  @apply bg-blue-100 hover:bg-blue-200;
+}
+
+.tooltip {
+  @apply absolute z-10 p-2 bg-white rounded shadow-lg text-xs max-w-xs;
+}
