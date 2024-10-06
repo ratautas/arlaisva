@@ -1,36 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --accent-color: #e74c3c;
+  --background-color: #f7f9fc;
+  --text-color: #2c3e50;
+}
+
 body {
-  @apply bg-gray-50 text-gray-900 font-sans;
-  font-family: 'Roboto', sans-serif;
+  @apply bg-background text-text font-sans;
+  font-family: 'Poppins', sans-serif;
 }
 
 .calendar-container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+  @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16;
 }
 
 .month-grid {
-  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
 }
 
 .month-card {
-  @apply bg-white rounded-lg shadow-md overflow-hidden;
+  @apply bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105;
 }
 
 .month-header {
-  @apply bg-blue-600 text-white py-3 px-4 text-xl font-bold;
+  @apply bg-primary text-white py-4 px-5 text-2xl font-semibold;
 }
 
 .weekday-header {
-  @apply grid grid-cols-7 bg-gray-100 text-gray-600 text-xs uppercase font-semibold;
+  @apply grid grid-cols-7 bg-gray-100 text-gray-700 text-xs uppercase font-semibold;
 }
 
 .weekday {
-  @apply py-2 text-center;
+  @apply py-3 text-center;
 }
 
 .days-grid {
@@ -38,19 +46,19 @@ body {
 }
 
 .day {
-  @apply relative bg-white p-2 text-sm h-24 transition-colors duration-200;
+  @apply relative bg-white p-2 text-sm h-28 transition-all duration-200 ease-in-out;
 }
 
 .day-number {
-  @apply absolute top-1 left-1 font-light;
+  @apply absolute top-1 left-2 font-light text-base;
 }
 
 .day-content {
-  @apply mt-6 text-xs;
+  @apply mt-7 text-xs;
 }
 
 .holiday {
-  @apply bg-red-100 hover:bg-red-200;
+  @apply bg-accent bg-opacity-20 hover:bg-opacity-30;
 }
 
 .weekend {
@@ -62,13 +70,22 @@ body {
 }
 
 .long-weekend {
-  @apply bg-green-100 hover:bg-green-200;
+  @apply bg-secondary bg-opacity-20 hover:bg-opacity-30;
 }
 
 .extra-long-weekend {
-  @apply bg-blue-100 hover:bg-blue-200;
+  @apply bg-primary bg-opacity-20 hover:bg-opacity-30;
 }
 
 .tooltip {
-  @apply absolute z-10 p-2 bg-white rounded shadow-lg text-xs max-w-xs;
+  @apply absolute z-10 p-3 bg-white rounded-lg shadow-xl text-xs max-w-xs;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
 }
