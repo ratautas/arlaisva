@@ -28,7 +28,7 @@ function getDayClass(year, month, day) {
   const isExtendedWeekend = extendedWeekends.includes(dateString);
   const isExtraExtendedWeekend = extraExtendedWeekends.includes(dateString);
 
-  let classes = 'relative p-2 h-24 md:h-28 border border-gray-200 transition-all duration-200 ease-in-out';
+  let classes = 'relative p-2 h-16 md:h-20 border border-gray-200 transition-all duration-200 ease-in-out';
   if (isWeekend) classes += ' bg-gray-50 hover:bg-gray-100';
   if (isHoliday) classes += ' bg-red-50 hover:bg-red-100';
   if (isExtendedWeekend) classes += ' bg-green-50 hover:bg-green-100';
@@ -69,13 +69,8 @@ function getDayLabel(year, month, day) {
             const dayClass = getDayClass(year, monthIndex, day);
             const dayLabel = getDayLabel(year, monthIndex, day);
             return (
-              <div class={`${dayClass} group`} title={dayLabel || undefined}>
+              <div class={`${dayClass}`} title={dayLabel || undefined}>
                 <span class="absolute top-1 left-2 text-sm font-light">{day}</span>
-                {dayLabel && (
-                  <div class="hidden group-hover:block absolute bottom-1 left-1 right-1 text-xs bg-white bg-opacity-90 p-1 rounded shadow">
-                    {dayLabel}
-                  </div>
-                )}
               </div>
             );
           })}
