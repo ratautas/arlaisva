@@ -33,6 +33,10 @@ function getDayClass(year, month, day) {
   if (isHoliday) classes += ' bg-red-50 hover:bg-red-100';
   if (isExtendedWeekend) classes += ' bg-green-50 hover:bg-green-100';
   if (isExtraExtendedWeekend) classes += ' bg-blue-50 hover:bg-blue-100';
+  
+  const dayLabel = getDayLabel(year, month, day);
+  if (dayLabel) classes += ' has-tooltip';
+  
   return classes;
 }
 
@@ -92,10 +96,10 @@ function getDayLabel(year, month, day) {
             const dayClass = getDayClass(year, monthIndex, day);
             const dayLabel = getDayLabel(year, monthIndex, day);
             return (
-              <div class={`${dayClass}`} title={dayLabel || undefined}>
+              <div class={`${dayClass}`}>
                 <span class="absolute top-1 left-2 text-sm font-light">{day}</span>
                 {dayLabel && (
-                  <span class="sr-only">{dayLabel}</span>
+                  <span class="tooltip">{dayLabel}</span>
                 )}
               </div>
             );
