@@ -71,6 +71,9 @@ function getDayLabel(year, month, day) {
             return (
               <div class={`${dayClass}`} title={dayLabel || undefined}>
                 <span class="absolute top-1 left-2 text-sm font-light">{day}</span>
+                {dayLabel && (
+                  <span class="sr-only">{dayLabel}</span>
+                )}
               </div>
             );
           })}
