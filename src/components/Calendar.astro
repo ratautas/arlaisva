@@ -1,6 +1,7 @@
 ---
 import { getHolidays, getExtendedWeekends } from '../utils/holidayUtils.js';
 import { getMonthName, getWeekdayName, getMonthStartDay, getDaysInMonth, getCurrentYear } from '../utils/dateUtils.js';
+import { WEEKEND, HOLIDAY, EXTENDED_WEEKEND, EXTRA_EXTENDED_WEEKEND, WEEKEND_LABEL, HOLIDAY_LABEL, EXTENDED_WEEKEND_LABEL, EXTRA_EXTENDED_WEEKEND_LABEL } from '../utils/constants.js';
 
 const { year = getCurrentYear() } = Astro.props;
 
@@ -45,8 +46,8 @@ function getDayLabel(year, month, day) {
   const dateString = date.toLocaleString('lt-LT', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Europe/Vilnius' });
   const holiday = holidays.find(h => h.date === dateString);
   if (holiday) return holiday.name;
-  if (extraExtendedWeekends.includes(dateString)) return 'Ypač pratęstas savaitgalis';
-  if (extendedWeekends.includes(dateString)) return 'Pratęstas savaitgalis';
+  if (extraExtendedWeekends.includes(dateString)) return EXTRA_EXTENDED_WEEKEND_LABEL;
+  if (extendedWeekends.includes(dateString)) return EXTENDED_WEEKEND_LABEL;
   return '';
 }
 ---
