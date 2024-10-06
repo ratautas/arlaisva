@@ -28,11 +28,11 @@ function getDayClass(year, month, day) {
   const isExtendedWeekend = extendedWeekends.includes(dateString);
   const isExtraExtendedWeekend = extraExtendedWeekends.includes(dateString);
 
-  let classes = 'relative p-1 h-20 md:h-24 border border-gray-200';
-  if (isWeekend) classes += ' bg-gray-50';
-  if (isHoliday) classes += ' bg-red-50';
-  if (isExtendedWeekend) classes += ' bg-green-50';
-  if (isExtraExtendedWeekend) classes += ' bg-blue-50';
+  let classes = 'relative p-1 h-16 md:h-20 border border-gray-200 transition-colors duration-200';
+  if (isWeekend) classes += ' bg-gray-100 hover:bg-gray-200';
+  if (isHoliday) classes += ' bg-red-100 hover:bg-red-200';
+  if (isExtendedWeekend) classes += ' bg-green-100 hover:bg-green-200';
+  if (isExtraExtendedWeekend) classes += ' bg-blue-100 hover:bg-blue-200';
   return classes;
 }
 
@@ -47,17 +47,17 @@ function getDayLabel(year, month, day) {
 }
 ---
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gray-100">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gray-50">
   <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">{year} Metų Kalendorius</h1>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     {months.map((month, monthIndex) => (
-      <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-        <div class="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-3 px-4">
-          <h2 class="text-xl font-bold text-center">{month.name}</h2>
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-gradient-to-r from-indigo-600 to-indigo-400 text-white py-2 px-4">
+          <h2 class="text-lg font-semibold text-center">{month.name}</h2>
         </div>
-        <div class="grid grid-cols-7 bg-gray-100 text-gray-600 text-xs font-medium">
+        <div class="grid grid-cols-7 bg-gray-50 text-gray-700 text-xs font-medium">
           {weekdays.map((day) => (
-            <div class="py-2 text-center">{day}</div>
+            <div class="py-1 text-center">{day}</div>
           ))}
         </div>
         <div class="grid grid-cols-7">
@@ -69,13 +69,8 @@ function getDayLabel(year, month, day) {
             const dayClass = getDayClass(year, monthIndex, day);
             const dayLabel = getDayLabel(year, monthIndex, day);
             return (
-              <div class={dayClass}>
-                <span class="absolute top-1 left-1 text-sm font-semibold">{day}</span>
-                {dayLabel && (
-                  <div class="mt-5 text-xs line-clamp-2 overflow-hidden text-gray-600">
-                    {dayLabel}
-                  </div>
-                )}
+              <div class={dayClass} title={dayLabel}>
+                <span class="absolute top-1 left-1 text-xs font-medium">{day}</span>
               </div>
             );
           })}
@@ -85,24 +80,24 @@ function getDayLabel(year, month, day) {
   </div>
 </div>
 
-<div class="max-w-2xl mx-auto mt-12 p-6 bg-white rounded-xl shadow-lg">
+<div class="max-w-2xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-md">
   <h2 class="text-2xl font-bold text-gray-800 mb-4">Spalvų reikšmės</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <div class="flex items-center">
-      <div class="w-6 h-6 bg-gray-50 border border-gray-200 mr-2"></div>
-      <span>Savaitgalis</span>
+      <div class="w-6 h-6 bg-gray-100 border border-gray-200 mr-2"></div>
+      <span class="text-sm">Savaitgalis</span>
     </div>
     <div class="flex items-center">
-      <div class="w-6 h-6 bg-red-50 border border-gray-200 mr-2"></div>
-      <span>Šventinė diena</span>
+      <div class="w-6 h-6 bg-red-100 border border-gray-200 mr-2"></div>
+      <span class="text-sm">Šventinė diena</span>
     </div>
     <div class="flex items-center">
-      <div class="w-6 h-6 bg-green-50 border border-gray-200 mr-2"></div>
-      <span>Pratęstas savaitgalis (4+ dienos)</span>
+      <div class="w-6 h-6 bg-green-100 border border-gray-200 mr-2"></div>
+      <span class="text-sm">Pratęstas savaitgalis (4+ dienos)</span>
     </div>
     <div class="flex items-center">
-      <div class="w-6 h-6 bg-blue-50 border border-gray-200 mr-2"></div>
-      <span>Ypač pratęstas savaitgalis (5+ dienos)</span>
+      <div class="w-6 h-6 bg-blue-100 border border-gray-200 mr-2"></div>
+      <span class="text-sm">Ypač pratęstas savaitgalis (5+ dienos)</span>
     </div>
   </div>
 </div>
