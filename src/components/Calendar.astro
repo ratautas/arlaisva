@@ -1,7 +1,7 @@
 ---
 import { getHolidays, getExtendedWeekends } from '../utils/holidayUtils.js';
 import { getMonthName, getWeekdayName, getMonthStartDay, getDaysInMonth, getCurrentYear, formatDate } from '../utils/dateUtils.js';
-import { WEEKEND, HOLIDAY, EXTENDED_WEEKEND, EXTRA_EXTENDED_WEEKEND, WEEKEND_LABEL, HOLIDAY_LABEL, EXTENDED_WEEKEND_LABEL, EXTRA_EXTENDED_WEEKEND_LABEL } from '../utils/constants.js';
+import { EXTENDED_WEEKEND_LABEL, EXTRA_EXTENDED_WEEKEND_LABEL } from '../utils/constants.js';
 
 const { year = getCurrentYear() } = Astro.props;
 
@@ -30,10 +30,10 @@ function getDayClass(year, month, day) {
   const isExtraExtendedWeekend = extraExtendedWeekends.includes(dateString);
 
   let classes = 'relative transition-all duration-200 ease-in-out';
-  if (isWeekend) classes += ' bg-gray-50/80 hover:bg-gray-100';
-  if (isHoliday) classes += ' bg-red-50/80 hover:bg-red-100';
-  if (isExtendedWeekend) classes += ' bg-green-50/80 hover:bg-green-100';
-  if (isExtraExtendedWeekend) classes += ' bg-blue-50/80 hover:bg-blue-100';
+  if (isWeekend) classes += ' bg-gray-100/80 hover:bg-gray-100';
+  if (isHoliday) classes += ' bg-red-100/80 hover:bg-red-100';
+  if (isExtendedWeekend) classes += ' bg-green-100/80 hover:bg-green-100';
+  if (isExtraExtendedWeekend) classes += ' bg-blue-100/80 hover:bg-blue-100';
   
   const dayLabel = getDayLabel(year, month, day);
   if (dayLabel) classes += ' has-tooltip';
@@ -52,58 +52,11 @@ function getDayLabel(year, month, day) {
 }
 ---
 
-<div class="calendar-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <div class="max-w-4xl mx-auto mb-8 p-4 bg-gray-50/50 rounded-xl">
-    <h2 class="text-base font-medium text-gray-600 mb-3">Spalvų reikšmės</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-      <div class="flex items-center">
-        <div class="w-3 h-3 bg-white rounded-sm mr-2"></div>
-        <span class="text-gray-500">Savaitgalis</span>
-      </div>
-      <div class="flex items-center">
-        <div class="w-3 h-3 bg-red-50 rounded-sm mr-2"></div>
-        <span class="text-gray-500">Šventinė diena</span>
-      </div>
-      <div class="flex items-center">
-        <div class="w-3 h-3 bg-green-50 rounded-sm mr-2"></div>
-        <span class="text-gray-500">Pratęstas savaitgalis (4+)</span>
-      </div>
-      <div class="flex items-center">
-        <div class="w-3 h-3 bg-blue-50 rounded-sm mr-2"></div>
-        <span class="text-gray-500">Ypač pratęstas savaitgalis (5+)</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="max-w-4xl mx-auto mb-8 p-6 bg-white rounded-xl shadow-sm">
-    <h2 class="text-lg font-medium text-gray-700 mb-4">Pratęsti savaitgaliai {year} metais</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <h3 class="text-sm font-medium text-gray-600 mb-3">Pratęsti savaitgaliai (4+ dienos)</h3>
-        <div class="grid grid-cols-2 gap-2 text-xs">
-          {extendedWeekends.map((date) => (
-            <div class="bg-green-50 p-2 rounded-lg text-gray-700">
-              {formatDate(new Date(date))}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div>
-        <h3 class="text-sm font-medium text-gray-600 mb-3">Ypač pratęsti savaitgaliai (5+ dienos)</h3>
-        <div class="grid grid-cols-2 gap-2 text-xs">
-          {extraExtendedWeekends.map((date) => (
-            <div class="bg-blue-50 p-2 rounded-lg text-gray-700">
-              {formatDate(new Date(date))}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="calendar-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     {months.map((month, monthIndex) => (
-      <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
         <div class="py-3 px-4">
           <h2 class="text-lg font-medium text-gray-700 text-center">{month.name}</h2>
         </div>
@@ -114,7 +67,7 @@ function getDayLabel(year, month, day) {
         </div>
         <div class="grid grid-cols-7 gap-[1px] bg-white p-[1px]">
           {Array.from({ length: month.startDay }).map(() => (
-            <div class="bg-gray-50 h-7"></div>
+            <div class="bg-gray-50/80 h-7"></div>
           ))}
           {Array.from({ length: month.days }).map((_, dayIndex) => {
             const day = dayIndex + 1;
@@ -132,6 +85,54 @@ function getDayLabel(year, month, day) {
         </div>
       </div>
     ))}
+  </div>
+
+  <div class="max-w-4xl mx-auto mb-8 p-4 bg-gray-100/50 rounded-xl">
+    <h2 class="text-base font-medium text-gray-600 mb-3">Spalvų reikšmės</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-white rounded-sm mr-2"></div>
+        <span class="text-gray-500">Savaitgalis</span>
+      </div>
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-red-100 rounded-sm mr-2"></div>
+        <span class="text-gray-500">Šventinė diena</span>
+      </div>
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-green-100 rounded-sm mr-2"></div>
+        <span class="text-gray-500">Pratęstas savaitgalis (4+)</span>
+      </div>
+      <div class="flex items-center">
+        <div class="w-3 h-3 bg-blue-100 rounded-sm mr-2"></div>
+        <span class="text-gray-500">Ypač pratęstas savaitgalis (5+)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto mb-8 p-6 bg-white rounded-xl shadow-sm">
+    <h2 class="text-lg font-medium text-gray-700 mb-4">Pratęsti savaitgaliai {year} metais</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-sm font-medium text-gray-600 mb-3">Pratęsti savaitgaliai (4+ dienos)</h3>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          {extendedWeekends.map((date) => (
+            <div class="bg-green-100 p-2 rounded-lg text-gray-700">
+              {formatDate(new Date(date))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h3 class="text-sm font-medium text-gray-600 mb-3">Ypač pratęsti savaitgaliai (5+ dienos)</h3>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          {extraExtendedWeekends.map((date) => (
+            <div class="bg-blue-100 p-2 rounded-lg text-gray-700">
+              {formatDate(new Date(date))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
