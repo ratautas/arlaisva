@@ -12,22 +12,22 @@ const urlYear = Astro.url.pathname.split('/')[1];
 const selectedYear = urlYear && !isNaN(parseInt(urlYear)) ? parseInt(urlYear) : currentYear;
 ---
 
-<nav class="bg-gray-900 border-b border-gray-800">
+<nav class="bg-white/80 backdrop-blur-sm border-b border-gray-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
         <a href="/" class="flex-shrink-0">
-          <span class="text-white font-bold text-lg">LT Kalendorius</span>
+          <span class="text-gray-700 font-medium text-lg">LT Kalendorius</span>
         </a>
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
-            <a href="/" class={`text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium ${isActive('home')}`}>
+            <a href="/" class={`text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive('home')}`}>
               Pradžia
             </a>
-            <a href="/holidays" class={`text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium ${isActive('holidays')}`}>
+            <a href="/holidays" class={`text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive('holidays')}`}>
               Šventės
             </a>
-            <a href="/about" class={`text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium ${isActive('about')}`}>
+            <a href="/about" class={`text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive('about')}`}>
               Apie
             </a>
           </div>
@@ -36,7 +36,7 @@ const selectedYear = urlYear && !isNaN(parseInt(urlYear)) ? parseInt(urlYear) : 
       <div class="ml-4 flex items-center md:ml-6">
         <select
           id="yearSelect"
-          class="bg-gray-800 text-white px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+          class="bg-white text-gray-700 px-3 py-2 text-sm font-medium rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-200 transition-all"
         >
           {years.map((year) => (
             <option value={year} selected={year === selectedYear}>

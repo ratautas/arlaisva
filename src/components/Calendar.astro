@@ -29,11 +29,11 @@ function getDayClass(year, month, day) {
   const isExtendedWeekend = extendedWeekends.includes(dateString);
   const isExtraExtendedWeekend = extraExtendedWeekends.includes(dateString);
 
-  let classes = 'relative border border-gray-700 transition-all duration-200 ease-in-out';
-  if (isWeekend) classes += ' bg-gray-600 hover:bg-gray-500';
-  if (isHoliday) classes += ' bg-red-900 hover:bg-red-800';
-  if (isExtendedWeekend) classes += ' bg-green-900 hover:bg-green-800';
-  if (isExtraExtendedWeekend) classes += ' bg-blue-900 hover:bg-blue-800';
+  let classes = 'relative transition-all duration-200 ease-in-out';
+  if (isWeekend) classes += ' bg-gray-50/80 hover:bg-gray-100';
+  if (isHoliday) classes += ' bg-red-50/80 hover:bg-red-100';
+  if (isExtendedWeekend) classes += ' bg-green-50/80 hover:bg-green-100';
+  if (isExtraExtendedWeekend) classes += ' bg-blue-50/80 hover:bg-blue-100';
   
   const dayLabel = getDayLabel(year, month, day);
   if (dayLabel) classes += ' has-tooltip';
@@ -53,47 +53,47 @@ function getDayLabel(year, month, day) {
 ---
 
 <div class="calendar-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <div class="max-w-4xl mx-auto mb-4 p-4 bg-gray-800 border border-gray-700">
-    <h2 class="text-lg font-bold text-white mb-2">Spalvų reikšmės</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+  <div class="max-w-4xl mx-auto mb-8 p-4 bg-gray-50/50 rounded-xl">
+    <h2 class="text-base font-medium text-gray-600 mb-3">Spalvų reikšmės</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
       <div class="flex items-center">
-        <div class="w-4 h-4 bg-gray-600 border border-gray-500 mr-2"></div>
-        <span class="text-gray-300">Savaitgalis</span>
+        <div class="w-3 h-3 bg-white rounded-sm mr-2"></div>
+        <span class="text-gray-500">Savaitgalis</span>
       </div>
       <div class="flex items-center">
-        <div class="w-4 h-4 bg-red-900 border border-red-800 mr-2"></div>
-        <span class="text-gray-300">Šventinė diena</span>
+        <div class="w-3 h-3 bg-red-50 rounded-sm mr-2"></div>
+        <span class="text-gray-500">Šventinė diena</span>
       </div>
       <div class="flex items-center">
-        <div class="w-4 h-4 bg-green-900 border border-green-800 mr-2"></div>
-        <span class="text-gray-300">Pratęstas savaitgalis (4+)</span>
+        <div class="w-3 h-3 bg-green-50 rounded-sm mr-2"></div>
+        <span class="text-gray-500">Pratęstas savaitgalis (4+)</span>
       </div>
       <div class="flex items-center">
-        <div class="w-4 h-4 bg-blue-900 border border-blue-800 mr-2"></div>
-        <span class="text-gray-300">Ypač pratęstas savaitgalis (5+)</span>
+        <div class="w-3 h-3 bg-blue-50 rounded-sm mr-2"></div>
+        <span class="text-gray-500">Ypač pratęstas savaitgalis (5+)</span>
       </div>
     </div>
   </div>
 
-  <div class="max-w-4xl mx-auto mt-8 p-4 bg-gray-800 border border-gray-700">
-    <h2 class="text-lg font-bold text-white mb-2">Pratęsti savaitgaliai {year} metais</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="max-w-4xl mx-auto mb-8 p-6 bg-white rounded-xl shadow-sm">
+    <h2 class="text-lg font-medium text-gray-700 mb-4">Pratęsti savaitgaliai {year} metais</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <h3 class="text-md font-semibold text-white mb-2">Pratęsti savaitgaliai (4+ dienos)</h3>
+        <h3 class="text-sm font-medium text-gray-600 mb-3">Pratęsti savaitgaliai (4+ dienos)</h3>
         <div class="grid grid-cols-2 gap-2 text-xs">
           {extendedWeekends.map((date) => (
-            <div class="bg-green-900 p-2 rounded">
-              <span class="text-gray-300">{formatDate(new Date(date))}</span>
+            <div class="bg-green-50 p-2 rounded-lg text-gray-700">
+              {formatDate(new Date(date))}
             </div>
           ))}
         </div>
       </div>
       <div>
-        <h3 class="text-md font-semibold text-white mb-2">Ypač pratęsti savaitgaliai (5+ dienos)</h3>
+        <h3 class="text-sm font-medium text-gray-600 mb-3">Ypač pratęsti savaitgaliai (5+ dienos)</h3>
         <div class="grid grid-cols-2 gap-2 text-xs">
           {extraExtendedWeekends.map((date) => (
-            <div class="bg-blue-900 p-2 rounded">
-              <span class="text-gray-300">{formatDate(new Date(date))}</span>
+            <div class="bg-blue-50 p-2 rounded-lg text-gray-700">
+              {formatDate(new Date(date))}
             </div>
           ))}
         </div>
@@ -101,28 +101,28 @@ function getDayLabel(year, month, day) {
     </div>
   </div>
 
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     {months.map((month, monthIndex) => (
-      <div class="bg-gray-800 border border-gray-700">
-        <div class="bg-gray-900 text-white py-3 px-4">
-          <h2 class="text-xl font-semibold text-center">{month.name}</h2>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+        <div class="py-3 px-4">
+          <h2 class="text-lg font-medium text-gray-700 text-center">{month.name}</h2>
         </div>
-        <div class="grid grid-cols-7 bg-gray-700 text-gray-300 text-xs font-semibold">
+        <div class="grid grid-cols-7 text-gray-500 text-xs font-medium">
           {weekdays.map((day) => (
             <div class="py-2 text-center">{day}</div>
           ))}
         </div>
-        <div class="grid grid-cols-7 gap-px bg-gray-900 text-xs">
+        <div class="grid grid-cols-7 gap-[1px] bg-white p-[1px]">
           {Array.from({ length: month.startDay }).map(() => (
-            <div class="bg-gray-800 h-6"></div>
+            <div class="bg-gray-50 h-7"></div>
           ))}
           {Array.from({ length: month.days }).map((_, dayIndex) => {
             const day = dayIndex + 1;
             const dayClass = getDayClass(year, monthIndex, day);
             const dayLabel = getDayLabel(year, monthIndex, day);
             return (
-              <div class={`${dayClass} h-6 flex items-center justify-center`}>
-                <span class="font-light">{day}</span>
+              <div class={`${dayClass} h-7 flex items-center justify-center hover:shadow-sm`}>
+                <span class="text-gray-700">{day}</span>
                 {dayLabel && (
                   <span class="tooltip">{dayLabel}</span>
                 )}
@@ -134,3 +134,36 @@ function getDayLabel(year, month, day) {
     ))}
   </div>
 </div>
+
+<style>
+  .has-tooltip {
+    position: relative;
+  }
+  .has-tooltip .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #ffffff;
+    color: #1e293b;
+    text-align: center;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .has-tooltip .tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #ffffff transparent transparent transparent;
+  }
+</style>
