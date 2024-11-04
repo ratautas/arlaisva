@@ -30,10 +30,10 @@ function getDayClass(year, month, day) {
   const isExtraExtendedWeekend = extraExtendedWeekends.includes(dateString);
 
   let classes = 'relative transition-all duration-200 ease-in-out';
-  if (isWeekend) classes += ' bg-gray-100/80 hover:bg-gray-100';
-  if (isHoliday) classes += ' bg-red-100/80 hover:bg-red-100';
-  if (isExtendedWeekend) classes += ' bg-green-100/80 hover:bg-green-100';
-  if (isExtraExtendedWeekend) classes += ' bg-blue-100/80 hover:bg-blue-100';
+  if (isWeekend) classes += ' bg-gray-100/80 hover:bg-gray-100 weekend';
+  if (isHoliday) classes += ' bg-red-100/80 hover:bg-red-100 holiday';
+  if (isExtendedWeekend) classes += ' bg-green-100/80 hover:bg-green-100 extended-weekend';
+  if (isExtraExtendedWeekend) classes += ' bg-blue-100/80 hover:bg-blue-100 extra-extended-weekend';
   
   const dayLabel = getDayLabel(year, month, day);
   if (dayLabel) classes += ' has-tooltip';
@@ -50,9 +50,23 @@ function getDayLabel(year, month, day) {
   if (extendedWeekends.includes(dateString)) return EXTENDED_WEEKEND_LABEL;
   return '';
 }
+
+function getDayName(year, month, day) {
+  const date = new Date(Date.UTC(year, month, day));
+  const dateString = date.toLocaleString('lt-LT', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Europe/Vilnius' });
+  const dayOfWeek = date.getUTCDay();
+  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+  const isHoliday = holidays.some(h => h.date === dateString);
+  const isExtendedWeekend = extendedWeekends.includes(dateString);
+  const isExtraExtendedWeekend = extraExtendedWeekends.includes(dateString);
+  if (isHoliday) return 'holiday';
+  if (isExtendedWeekend) return 'extended-weekend';
+  if (isExtraExtendedWeekend) return 'extra-extended-weekend';
+  return '';
+}
 ---
 
-<div class="calendar-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="calendar-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" id="holiday">
 
   <div class="max-w-4xl mx-auto mb-8 flex items-center justify-center space-x-4">
     <a 
@@ -95,8 +109,9 @@ function getDayLabel(year, month, day) {
             const day = dayIndex + 1;
             const dayClass = getDayClass(year, monthIndex, day);
             const dayLabel = getDayLabel(year, monthIndex, day);
+            const name = getDayName(year, monthIndex, day);
             return (
-              <div class={`${dayClass} h-7 flex items-center justify-center hover:shadow-sm`}>
+              <div class={`${dayClass} h-7 flex items-center justify-center hover:shadow-sm`} name={name}>
                 <span class="text-gray-700">{day}</span>
                 {dayLabel && (
                   <span class="tooltip">{dayLabel}</span>
@@ -189,4 +204,5 @@ function getDayLabel(year, month, day) {
     border-style: solid;
     border-color: #ffffff transparent transparent transparent;
   }
+
 </style>
