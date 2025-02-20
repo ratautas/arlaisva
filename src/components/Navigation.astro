@@ -16,11 +16,11 @@ const prevYear = selectedYear - 1;
 const nextYear = selectedYear + 1;
 ---
 
-<nav class="bg-white/80 backdrop-blur-sm border-b border-gray-100">
+<nav class="bg-white/80 backdrop-blur-xs border-b border-gray-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
-        <a href="/" class="flex-shrink-0">
+        <a href="/" class="shrink-0">
           <span class="text-gray-700 font-medium text-lg">LT Kalendorius</span>
         </a>
         <div class="hidden md:block">
@@ -50,7 +50,7 @@ const nextYear = selectedYear + 1;
         
         <select
           id="yearSelect"
-          class="bg-white text-gray-700 px-3 py-2 text-sm font-medium rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-200 transition-all"
+          class="bg-white text-gray-700 px-3 py-2 text-sm font-medium rounded-md border border-gray-200 focus:outline-hidden focus:ring-2 focus:ring-blue-100 focus:border-blue-200 transition-all"
         >
           {years.map((year) => (
             <option value={year} selected={year === selectedYear}>

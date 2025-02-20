@@ -1,8 +1,92 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility calendar-container {
+  @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16;
+}
+
+@utility month-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
+}
+
+@utility month-card {
+  @apply bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105;
+}
+
+@utility month-header {
+  @apply bg-blue-500 text-white py-4 px-5 text-2xl font-semibold;
+}
+
+@utility weekday-header {
+  @apply grid grid-cols-7 bg-gray-100 text-gray-700 text-xs uppercase font-semibold;
+}
+
+@utility weekday {
+  @apply py-3 text-center;
+}
+
+@utility days-grid {
+  @apply grid grid-cols-7 gap-px bg-gray-200;
+}
+
+@utility day {
+  @apply relative bg-white p-2 text-sm h-28 transition-all duration-200 ease-in-out;
+}
+
+@utility day-number {
+  @apply absolute top-1 left-2 font-light text-base;
+}
+
+@utility day-content {
+  @apply mt-7 text-xs;
+}
+
+@utility holiday {
+  @apply bg-red-100 hover:bg-red-200;
+}
+
+@utility weekend {
+  @apply bg-gray-50;
+}
+
+@utility empty-day {
+  @apply bg-gray-50;
+}
+
+@utility long-weekend {
+  @apply bg-green-100 hover:bg-green-200;
+}
+
+@utility extra-long-weekend {
+  @apply bg-blue-100 hover:bg-blue-200;
+}
+
+@utility tooltip {
+  @apply absolute z-10 p-3 bg-white rounded-lg shadow-xl text-xs max-w-xs;
+}
+
+@utility animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
 
 @layer base {
   body {
@@ -11,76 +95,7 @@
   }
 }
 
-@layer components {
-  .calendar-container {
-    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16;
-  }
-
-  .month-grid {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10;
-  }
-
-  .month-card {
-    @apply bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105;
-  }
-
-  .month-header {
-    @apply bg-blue-500 text-white py-4 px-5 text-2xl font-semibold;
-  }
-
-  .weekday-header {
-    @apply grid grid-cols-7 bg-gray-100 text-gray-700 text-xs uppercase font-semibold;
-  }
-
-  .weekday {
-    @apply py-3 text-center;
-  }
-
-  .days-grid {
-    @apply grid grid-cols-7 gap-px bg-gray-200;
-  }
-
-  .day {
-    @apply relative bg-white p-2 text-sm h-28 transition-all duration-200 ease-in-out;
-  }
-
-  .day-number {
-    @apply absolute top-1 left-2 font-light text-base;
-  }
-
-  .day-content {
-    @apply mt-7 text-xs;
-  }
-
-  .holiday {
-    @apply bg-red-100 hover:bg-red-200;
-  }
-
-  .weekend {
-    @apply bg-gray-50;
-  }
-
-  .empty-day {
-    @apply bg-gray-50;
-  }
-
-  .long-weekend {
-    @apply bg-green-100 hover:bg-green-200;
-  }
-
-  .extra-long-weekend {
-    @apply bg-blue-100 hover:bg-blue-200;
-  }
-
-  .tooltip {
-    @apply absolute z-10 p-3 bg-white rounded-lg shadow-xl text-xs max-w-xs;
-  }
-}
-
 @layer utilities {
-  .animate-fadeIn {
-    animation: fadeIn 0.5s ease-in-out;
-  }
 
   @keyframes fadeIn {
     from { opacity: 0; }
